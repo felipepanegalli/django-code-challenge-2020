@@ -5,13 +5,14 @@ from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.models import Author, Book, Customer, Order
+from api.models import Author, Book, Customer, Order, OrderItems
 
 from .serializers import (
     AuthorSerializer,
     BookSerializer,
     CustomerSerializer,
     OrderSerializer,
+    OrderItemsSerializer,
 )
 
 
@@ -82,3 +83,8 @@ class CustomerViewSet(viewsets.ModelViewSet):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+
+
+class OrderItemsViewSet(viewsets.ModelViewSet):
+    queryset = OrderItems.objects.all()
+    serializer_class = OrderItemsSerializer

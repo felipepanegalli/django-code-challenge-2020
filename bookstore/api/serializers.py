@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 
-from api.models import Author, Book, Customer, Order
+from api.models import Author, Book, Customer, Order, OrderItems
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -29,4 +29,10 @@ class CustomerSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
+        fields = "__all__"
+
+
+class OrderItemsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItems
         fields = "__all__"

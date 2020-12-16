@@ -19,6 +19,9 @@ class Book(models.Model):
     price = models.FloatField(_("Preço"))
     created_at = models.DateTimeField(_("Criado em:"), auto_now_add=True)
 
+    def __str__(self):
+        return self.title
+
 
 class Customer(models.Model):
     first_name = models.CharField(_("Primeiro Nome"), max_length=30)
@@ -35,5 +38,18 @@ class Customer(models.Model):
 class Order(models.Model):
     customer = models.ForeignKey(
         "api.Customer", verbose_name=_("Cliente"), on_delete=models.CASCADE
+    )
+    created_at = models.DateTimeField(_("Criado em:"), auto_now_add=True)
+
+    def __str__(self):
+        return "Order: " + str(self.id) + " - " + str(self.customer)
+
+
+class OrderItems(models.Model):
+    order = models.ForeignKey(
+        "api.Order", verbose_name=_("Ordem"), on_delete=models.CASCADE
+    )
+    book = models.ForeignKey(
+        "api.Book", verbose_name=_("Livro"), on_delete=models.CASCADE
     )
     created_at = models.DateTimeField(_("Criado em:"), auto_now_add=True)
