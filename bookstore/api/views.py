@@ -54,7 +54,7 @@ class BookDetail(APIView):
             book = self.get_object(pk)
         except Http404:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = BookSerializer(data=request.data)
+        serializer = BookSerializer(book, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
