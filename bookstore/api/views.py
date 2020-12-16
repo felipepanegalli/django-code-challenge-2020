@@ -5,9 +5,14 @@ from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.models import Author, Book
+from api.models import Author, Book, Customer, Order
 
-from .serializers import AuthorSerializer, BookSerializer
+from .serializers import (
+    AuthorSerializer,
+    BookSerializer,
+    CustomerSerializer,
+    OrderSerializer,
+)
 
 
 # Create your views here.
@@ -67,3 +72,13 @@ class BookDetail(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
         book.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class CustomerViewSet(viewsets.ModelViewSet):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
